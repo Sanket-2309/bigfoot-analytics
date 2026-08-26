@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bigfoot Analytics — EU AI Act Compliance Auditing</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0f1e; color: #e8eaf6; line-height: 1.6; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; background: rgba(10,15,30,0.95); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 100; border-bottom: 1px solid #1b2a4a; }
+  .logo { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+  .logo span { color: #2e75b6; }
+  nav a { color: #aab; text-decoration: none; margin-left: 28px; font-size: 0.9rem; transition: color 0.2s; }
+  nav a:hover { color: #2e75b6; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; background: linear-gradient(135deg, #0a0f1e 0%, #1b2a4a 100%); }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 24px; }
+  .hero h1 span { color: #2e75b6; }
+  .hero p { font-size: 1.2rem; color: #aab; max-width: 600px; margin: 0 auto 40px; }
+  .btn { display: inline-block; background: #2e75b6; color: #fff; padding: 16px 36px; border-radius: 4px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: background 0.2s; margin: 8px; }
+  .btn:hover { background: #1b5a96; }
+  .btn-outline { background: transparent; border: 2px solid #2e75b6; color: #2e75b6; }
+  .btn-outline:hover { background: #2e75b6; color: #fff; }
+
+  /* URGENCY BAR */
+  .urgency { background: #c00000; padding: 14px 40px; text-align: center; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.5px; }
+
+  /* STATS */
+  .stats { padding: 80px 40px; background: #0d1525; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .stat-number { font-size: 3rem; font-weight: 800; color: #2e75b6; }
+  .stat-label { color: #aab; font-size: 0.9rem; margin-top: 8px; }
+
+  /* SECTIONS */
+  section { padding: 80px 40px; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  h2 { font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 16px; }
+  .section-sub { color: #aab; margin-bottom: 48px; font-size: 1.05rem; }
+
+  /* FINDINGS */
+  .findings { background: #0a0f1e; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card { background: #111827; border: 1px solid #1b2a4a; border-radius: 8px; padding: 28px; transition: border-color 0.2s; }
+  .card:hover { border-color: #2e75b6; }
+  .card-tag { display: inline-block; background: #1b2a4a; color: #2e75b6; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 3px; margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase; }
+  .card h3 { font-size: 1.05rem; color: #fff; margin-bottom: 12px; font-weight: 600; }
+  .card p { color: #9aa; font-size: 0.9rem; line-height: 1.6; }
+  .severity { display: inline-block; margin-top: 16px; font-size: 0.8rem; font-weight: 700; padding: 3px 10px; border-radius: 3px; }
+  .high { background: rgba(192,0,0,0.15); color: #ff6b6b; }
+  .critical { background: rgba(192,0,0,0.25); color: #ff4444; }
+
+  /* SERVICES */
+  .services { background: #0d1525; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .service { background: #111827; border-radius: 8px; padding: 32px; border-top: 3px solid #2e75b6; }
+  .service h3 { color: #fff; font-size: 1.1rem; margin-bottom: 12px; }
+  .service p { color: #9aa; font-size: 0.9rem; line-height: 1.7; }
+  .price { color: #2e75b6; font-weight: 700; margin-top: 20px; font-size: 0.95rem; }
+
+  /* RESEARCH */
+  .research { background: #0a0f1e; }
+  .paper-box { background: #111827; border: 1px solid #1b2a4a; border-left: 4px solid #2e75b6; border-radius: 8px; padding: 32px; max-width: 700px; }
+  .paper-box h3 { color: #fff; font-size: 1.05rem; margin-bottom: 12px; line-height: 1.5; }
+  .paper-box p { color: #9aa; font-size: 0.9rem; margin-bottom: 20px; }
+  .paper-box a { color: #2e75b6; text-decoration: none; font-weight: 600; }
+  .paper-box a:hover { text-decoration: underline; }
+
+  /* ABOUT */
+  .about { background: #0d1525; }
+  .about-text { max-width: 700px; color: #bbc; font-size: 1rem; line-height: 1.8; }
+  .about-text strong { color: #fff; }
+
+  /* CONTACT */
+  .contact { background: #0a0f1e; text-align: center; }
+  .contact h2 { margin-bottom: 16px; }
+  .contact p { color: #aab; margin-bottom: 32px; font-size: 1.05rem; }
+  .contact-email { font-size: 1.3rem; color: #2e75b6; font-weight: 700; text-decoration: none; display: block; margin-bottom: 16px; }
+  .contact-email:hover { text-decoration: underline; }
+
+  /* FOOTER */
+  footer { background: #060b16; padding: 24px 40px; text-align: center; color: #556; font-size: 0.85rem; border-top: 1px solid #1b2a4a; }
+
+  /* DIVIDER */
+  .divider { width: 60px; height: 3px; background: #2e75b6; margin-bottom: 32px; }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; }
+    section { padding: 60px 20px; }
+    .stats { padding: 60px 20px; }
+    .urgency { padding: 12px 20px; font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Bigfoot<span>Analytics</span></div>
+  <div>
+    <a href="#findings">Findings</a>
+    <a href="#services">Services</a>
+    <a href="#research">Research</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h1>Your financial AI is<br>making decisions.<br><span>Is it making them legally?</span></h1>
+    <p>Bigfoot Analytics audits AI systems in financial services against EU AI Act requirements — before regulators do.</p>
+    <a href="credit_audit_report.pdf" class="btn" download>Download Credit Risk Audit</a>
+    <a href="fraud_audit_report.pdf" class="btn btn-outline" download>Download Fraud Detection Audit</a>
+    <a href="#contact" class="btn btn-outline">Book a Free Call</a>
+  </div>
+</div>
+
+<!-- URGENCY -->
+<div class="urgency">
+  ⚡ August 2026 — EU AI Act enforcement begins for high-risk financial AI. Fines up to €30,000,000. Most institutions are not ready.
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-number">€30M</div>
+      <div class="stat-label">Maximum regulatory fine for non-compliance</div>
+    </div>
+    <div>
+      <div class="stat-number">93%</div>
+      <div class="stat-label">Of features in audited fraud model legally unexplainable</div>
+    </div>
+    <div>
+      <div class="stat-number">45%</div>
+      <div class="stat-label">Of fraud value missed by model showing 99.8% accuracy</div>
+    </div>
+    <div>
+      <div class="stat-number">2026</div>
+      <div class="stat-label">Enforcement deadline — August 2nd</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINDINGS -->
+<section class="findings" id="findings">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <h2>What Our Audits Actually Found</h2>
+    <p class="section-sub">Real findings from real audits — not theoretical checklists.</p>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-tag">Credit Scoring · Art. 10(3)</div>
+        <h3>Missing Data Rewarded Over Financial Merit</h3>
+        <p>Absent checking account data ranked as the single most influential feature in a credit scoring model — above loan duration, credit amount, and age. The model was approving applicants because their data was missing, not because they were creditworthy.</p>
+        <span class="severity high">HIGH SEVERITY</span>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Fraud Detection · Art. 15</div>
+        <h3>The Accuracy Paradox — 99.8% Means Nothing</h3>
+        <p>A model predicting "legitimate" for every transaction achieves 99.83% accuracy. Our audit found the model only captured 45.2% of fraud value in euros — meaning thousands of euros in fraud escaped in the test period alone.</p>
+        <span class="severity critical">CRITICAL</span>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Fraud Detection · Art. 13 + GDPR Art. 22</div>
+        <h3>GDPR Conflicts Directly With EU AI Act</h3>
+        <p>PCA anonymisation applied for GDPR compliance made 93.3% of model features legally unexplainable. Customers have a right to explanation under GDPR Article 22 — the anonymisation makes that right impossible to fulfil.</p>
+        <span class="severity high">HIGH SEVERITY</span>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Credit Scoring · Art. 10(2)(f)</div>
+        <h3>18-Point Accuracy Gap for Young Adults</h3>
+        <p>Young adults under 25 faced systematically lower approval rates and an 18-percentage-point accuracy gap compared to older applicants — not because of higher credit risk, but because of structurally shorter credit histories.</p>
+        <span class="severity high">HIGH SEVERITY</span>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Fraud Detection · Art. 15</div>
+        <h3>Wrong Decision Threshold Deployed</h3>
+        <p>Default threshold of 0.5 left significant fraud undetected. Our threshold analysis showed that changing to 0.3 raises F1 from 0.79 to 0.85 with near-zero increase in false positives — a simple fix with major compliance impact.</p>
+        <span class="severity high">HIGH SEVERITY</span>
+      </div>
+
+      <div class="card">
+        <div class="card-tag">Both Models · Art. 14</div>
+        <h3>No Human Oversight Mechanism Documented</h3>
+        <p>Neither audited system had documented override procedures, monitoring dashboards, or shutdown protocols — all mandatory under Article 14. Human oversight was assumed, not architected.</p>
+        <span class="severity critical">CRITICAL</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <h2>What Bigfoot Analytics Does</h2>
+    <p class="section-sub">Technical compliance auditing for financial AI systems — not checkbox questionnaires.</p>
+    <div class="services-grid">
+
+      <div class="service">
+        <h3>Compliance Audit</h3>
+        <p>We test your AI model against EU AI Act requirements and deliver a structured findings report with severity ratings, article mappings, and concrete remediation actions. Covers Articles 6, 9, 10, 12, 13, 14 and 15.</p>
+        <div class="price">From EUR 2,500 per audit</div>
+      </div>
+
+      <div class="service">
+        <h3>Continuous Monitoring</h3>
+        <p>Quarterly re-audits and drift detection to keep your model compliant as the law evolves and your model changes over time. Automated alerts when compliance thresholds are breached.</p>
+        <div class="price">From EUR 500 per month</div>
+      </div>
+
+      <div class="service">
+        <h3>Free Readiness Call</h3>
+        <p>Not sure where to start? Book a free 30-minute EU AI Act readiness call. We assess your current exposure and tell you exactly what needs to be done before August 2026.</p>
+        <div class="price">Free — no commitment</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="research" id="research">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <h2>Grounded in Peer-Reviewed Research</h2>
+    <p class="section-sub">Our methodology is not a consulting framework. It is derived from published academic research.</p>
+    <div class="paper-box">
+      <h3>"Design Principles for AI Auditing Systems in Credit Scoring Under the EU AI Act: A Design Science Literature Review"</h3>
+      <p>Eight Compliance-by-Design principles derived from systematic review of 12 peer-reviewed sources from ABDC A and A* ranked journals. Introduces the Dynamic Compliance Architecture — a framework in which regulatory compliance is native, continuous, and automated.</p>
+      <a href="https://ssrn.com/abstract=7354783" target="_blank">Read the paper on SSRN →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="divider"></div>
+    <h2>About Bigfoot Analytics</h2>
+    <div class="about-text">
+      <p>Bigfoot Analytics was founded by <strong>Sanket Shrivas</strong> — a finance professional with banking operations experience including a <strong>Citi Bank New York project</strong>, now specialising in EU AI Act compliance for financial AI systems.</p>
+      <br>
+      <p>Currently completing a <strong>Master's in Data Science at IU International University Berlin</strong>. Independent researcher with published work on AI auditing design principles available on SSRN.</p>
+      <br>
+      <p>The name reflects what we do — <strong>we find things others miss.</strong> The compliance gaps hiding in plain sight inside your AI systems. The findings that standard questionnaire tools cannot detect because they never actually test the model.</p>
+      <br>
+      <p>Based in <strong>Berlin, Germany</strong>. Serving financial institutions and fintechs across the EU.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="divider" style="margin: 0 auto 32px;"></div>
+    <h2>Ready to audit your AI before August 2026?</h2>
+    <p>Book a free 30-minute compliance readiness call. No commitment. Just clarity on where you stand.</p>
+    <a href="mailto:contact@bigfoot-analytics.com" class="contact-email">contact@bigfoot-analytics.com</a>
+    <a href="https://www.linkedin.com/in/sanket-shrivas-b47277233" target="_blank" class="btn">Connect on LinkedIn</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Bigfoot Analytics · Berlin, Germany · EU AI Act Compliance Auditing for Financial AI Systems</p>
+</footer>
+
+</body>
+</html>
